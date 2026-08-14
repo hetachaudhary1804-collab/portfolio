@@ -1,0 +1,543 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Syne:wght@700;800&family=Share+Tech+Mono&display=swap');
+@import "tailwindcss";
+
+:root {
+  --background: #030305;
+  --foreground: #f1f5f9;
+  --accent: #00f0ff;
+  --accent-purple: #a855f7;
+
+  --font-sans: 'Outfit', sans-serif;
+  --font-mono: 'Share Tech Mono', monospace;
+  --font-syne: 'Syne', sans-serif;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-accent-purple: var(--accent-purple);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-syne: var(--font-syne);
+}
+
+/* =========================================================
+   BASE
+   ========================================================= */
+
+html {
+  background: #030305;
+  scroll-behavior: auto;
+  overscroll-behavior: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  background: var(--background);
+  color: var(--foreground);
+
+  overflow-x: hidden;
+
+  font-family: var(--font-sans);
+
+  overscroll-behavior: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-syne);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(35, 27, 70, 0.8);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(65, 49, 115, 0.95);
+}
+
+/*
+ * Internal section scrollbars
+ */
+
+[data-section-scroll="true"]::-webkit-scrollbar {
+  width: 4px;
+}
+
+[data-section-scroll="true"]::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+[data-section-scroll="true"]::-webkit-scrollbar-thumb {
+  background: rgba(50, 40, 90, 0.45);
+  border-radius: 999px;
+}
+
+[data-section-scroll="true"]::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 240, 255, 0.35);
+}
+
+/* Firefox */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #17112d transparent;
+}
+
+/* =========================================================
+   HUD PANELS
+   ========================================================= */
+
+.hud-panel {
+  position: relative;
+
+  background: rgba(4, 2, 12, 0.72);
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  border: 1px solid rgba(255, 255, 255, 0.02);
+
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.6);
+
+  transition:
+    background 0.4s,
+    box-shadow 0.4s,
+    border-color 0.4s;
+}
+
+.hud-panel::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  border-radius: inherit;
+
+  padding: 1px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(0, 240, 255, 0.25) 0%,
+      rgba(168, 85, 247, 0.06) 40%,
+      rgba(0, 0, 0, 0) 60%,
+      rgba(0, 240, 255, 0.1) 100%
+    );
+
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+
+  pointer-events: none;
+
+  transition: background 0.4s ease;
+}
+
+.hud-panel:hover::before {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(0, 240, 255, 0.6) 0%,
+      rgba(168, 85, 247, 0.4) 30%,
+      rgba(0, 240, 255, 0.1) 60%,
+      rgba(168, 85, 247, 0.5) 100%
+    );
+}
+
+.hud-panel:hover {
+  background: rgba(8, 5, 20, 0.85);
+
+  box-shadow:
+    0 0 35px rgba(0, 240, 255, 0.06),
+    0 25px 60px rgba(0, 0, 0, 0.7);
+}
+
+/* =========================================================
+   ACCENT HUD
+   ========================================================= */
+
+.hud-panel-accent {
+  position: relative;
+
+  background: rgba(4, 2, 12, 0.75);
+
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+
+  border: 1px solid rgba(0, 240, 255, 0.02);
+
+  box-shadow:
+    0 0 40px rgba(0, 240, 255, 0.08),
+    0 25px 60px rgba(0, 0, 0, 0.7);
+
+  transition:
+    background 0.4s,
+    box-shadow 0.4s;
+}
+
+.hud-panel-accent::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  border-radius: inherit;
+
+  padding: 1px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(0, 240, 255, 0.4) 0%,
+      rgba(0, 240, 255, 0.15) 50%,
+      rgba(168, 85, 247, 0.3) 100%
+    );
+
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   PURPLE HUD
+   ========================================================= */
+
+.hud-panel-purple {
+  position: relative;
+
+  background: rgba(4, 2, 12, 0.75);
+
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+
+  border: 1px solid rgba(168, 85, 247, 0.02);
+
+  box-shadow:
+    0 0 40px rgba(168, 85, 247, 0.08),
+    0 25px 60px rgba(0, 0, 0, 0.7);
+
+  transition:
+    background 0.4s,
+    box-shadow 0.4s;
+}
+
+.hud-panel-purple::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  border-radius: inherit;
+
+  padding: 1px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(168, 85, 247, 0.4) 0%,
+      rgba(168, 85, 247, 0.15) 50%,
+      rgba(0, 240, 255, 0.3) 100%
+    );
+
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   CYBER TEXT
+   ========================================================= */
+
+.text-glow-cyan {
+  text-shadow:
+    0 0 8px rgba(0, 240, 255, 0.5),
+    0 0 20px rgba(0, 240, 255, 0.15);
+}
+
+.text-glow-purple {
+  text-shadow:
+    0 0 8px rgba(168, 85, 247, 0.5),
+    0 0 20px rgba(168, 85, 247, 0.15);
+}
+
+.text-glow-white {
+  text-shadow:
+    0 0 10px rgba(255, 255, 255, 0.3),
+    0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+/* =========================================================
+   GRID
+   ========================================================= */
+
+.cyber-grid {
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.015) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.015) 1px,
+      transparent 1px
+    );
+
+  background-size: 50px 50px;
+}
+
+.neon-line-cyan {
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(0, 240, 255, 0.5),
+      transparent
+    );
+}
+
+.neon-line-purple {
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(168, 85, 247, 0.5),
+      transparent
+    );
+}
+
+/* =========================================================
+   CUSTOM CURSOR
+   ========================================================= */
+
+.custom-cursor-dot {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  width: 6px;
+  height: 6px;
+
+  background-color: #00f0ff;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  z-index: 10000;
+
+  transform: translate(-50%, -50%);
+
+  transition:
+    width 0.2s,
+    height 0.2s,
+    background-color 0.2s;
+}
+
+.custom-cursor-ring {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  width: 32px;
+  height: 32px;
+
+  border:
+    1px solid
+    rgba(0, 240, 255, 0.3);
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  z-index: 9999;
+
+  transform: translate(-50%, -50%);
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  font-family:
+    var(--font-mono),
+    monospace;
+
+  font-size: 8px;
+
+  font-weight: bold;
+
+  letter-spacing: 0.1em;
+
+  color: #00f0ff;
+
+  transition:
+    width 0.3s,
+    height 0.3s,
+    border-color 0.3s,
+    background-color 0.3s;
+}
+
+/* =========================================================
+   PORTFOLIO SCROLL SYSTEM
+   ========================================================= */
+
+.portfolio-viewport {
+  position: fixed;
+
+  inset: 0;
+
+  width: 100vw;
+  height: 100dvh;
+
+  overflow: hidden;
+}
+
+.portfolio-page {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+}
+
+/*
+ * Pages that contain their own content scrolling.
+ *
+ * Important:
+ * The parent page itself never scrolls.
+ * Only this element scrolls.
+ */
+
+.portfolio-internal-scroll {
+  width: 100%;
+  height: 100%;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  overscroll-behavior: contain;
+
+  -webkit-overflow-scrolling: touch;
+
+  scrollbar-gutter: stable;
+}
+
+/*
+ * Useful for pages where each child represents
+ * one complete screen/project.
+ */
+
+.portfolio-internal-scroll > .scroll-screen {
+  min-height: 100%;
+}
+
+/* =========================================================
+   FINAL ROBOT SCREEN
+   ========================================================= */
+
+.robot-end-screen {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(0, 240, 255, 0.08),
+      transparent 35%
+    ),
+    #02000a;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .custom-cursor-dot,
+  .custom-cursor-ring {
+    display: none;
+  }
+
+  .portfolio-viewport {
+    height: 100dvh;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
